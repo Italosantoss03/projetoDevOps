@@ -62,4 +62,10 @@ docker compose down -v     # remove também o volume (apaga os dados)
 
 ## Autores
 
-Preencher com os nomes da equipe.
+Equipe Galegos:
+
+- Ítalo Waldecy Pereira dos Santos
+- Hugo Duarte Dias
+- Caio Gomes Ferrão D'avila
+- Caetano Mesquita
+- Helio Gomes Cunha
