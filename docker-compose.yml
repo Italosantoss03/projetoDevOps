@@ -1,16 +1,22 @@
-version: '3.8'
 services:
   api:
     build: .
     ports:
       - "5000:5000"
+    environment:
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
     depends_on:
       - redis
+
   redis:
-    image: "redis:alpine"
+    image: redis:7-alpine
+    # appendonly garante que os dados sejam gravados em disco (volume)
+    command: ["redis-server", "--appendonly", "yes"]
     ports:
       - "6379:6379"
     volumes:
       - meus-dados:/data
+
 volumes:
   meus-dados:
