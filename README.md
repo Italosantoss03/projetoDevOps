@@ -10,8 +10,8 @@ Mostrar dois serviços que se comunicam pela rede interna do Compose e que mant�
 cliente --HTTP:5000--> [api (Flask)] --rede do Compose, host "redis":6379--> [redis] --> volume "meus-dados" (/data)
 ```
 
-- **api**: Flask; a cada acesso a `/` incrementa a chave `visitas` no Redis.
-- **redis**: `redis:7-alpine` com `--appendonly yes`, gravando em `/data`, montado no volume nomeado `meus-dados`.
+- **api**: Flask; a cada acesso a `/` incrementa a chave `visitas` no Redis e devolve uma página HTML com o contador (container `api_contador`).
+- **redis**: `redis:7-alpine` com `--appendonly yes`, gravando em `/data`, montado no volume nomeado `meus-dados` (container `banco_redis`).
 
 ## Versões e requisitos
 
@@ -32,13 +32,14 @@ docker compose up -d --build
 
 ## Verificação
 
-1. Acessar a API: `curl http://localhost:5000` (ou abrir no navegador). Resposta: `A API foi acessada 1 vez.`
-2. Repetir algumas vezes e ver o contador subir.
+1. Acessar a API: abrir `http://localhost:5000` no navegador (no Codespaces, pela aba **Portas**). A página mostra "Projeto DevOps - T02", o selo "API Online" e o contador de visitas.
+   Pelo terminal, só o número: `curl -s localhost:5000 | grep -oE 'count-number">[0-9]+' | cut -d'>' -f2`
+2. Atualizar a página algumas vezes e ver o contador subir.
 3. **Recriar o container preservando os dados:**
    ```bash
    docker compose rm -sf redis      # remove o container do Redis
    docker compose up -d redis       # cria um novo container
-   curl http://localhost:5000       # o contador continua de onde parou
+   # atualizar a página: o contador continua de onde parou
    ```
 4. Conferir o volume: `docker volume ls` (procure `meus-dados`).
 
@@ -69,7 +70,14 @@ docker compose down -v     # remove também o volume (apaga os dados)
 
 ## Entrega
 
-Versão entregue: tag `entrega-t02` (12/11/2026).
+Versão entregue: tag `entrega-t02` (12/11/2026), atualizada no mesmo dia com as mudanças abaixo.
+
+### Mudanças depois da primeira entrega (12/11/2026)
+
+- `app.py`: a resposta passou de texto simples para uma página HTML com o contador de visitas.
+- `docker-compose.yml`: nomes de container (`api_contador`, `banco_redis`) e `restart: unless-stopped`; removida a linha `version`, obsoleta no Compose v2; imagem do Redis mantida em `redis:7-alpine` com `--appendonly yes`.
+- `.env.example`: só `REDIS_HOST`, a única variável que a API usa.
+- Slides (PPTX e PDF): a demonstração passou a abrir a página no navegador, no Codespaces.
 
 ## Autores
 
