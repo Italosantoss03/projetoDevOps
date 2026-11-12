@@ -13,7 +13,8 @@ cache = redis.Redis(
 @app.route("/")
 def hello():
     count = cache.incr("visitas")
-    return f"A API foi acedida {count} vezes."
+    vezes = "vez" if count == 1 else "vezes"
+    return f"A API foi acessada {count} {vezes}.\n"
 
 
 if __name__ == "__main__":

@@ -19,6 +19,8 @@ cliente --HTTP:5000--> [api (Flask)] --rede do Compose, host "redis":6379--> [re
 - Python 3.9 (imagem `python:3.9-alpine`), Flask, redis-py
 - Redis 7 (`redis:7-alpine`)
 
+**Versões testadas (12/11/2026, GitHub Codespaces):** Docker 29.9.2-2 e Docker Compose v5.6.1.
+
 Dados fictícios: o único dado é um contador de visitas.
 
 ## Execução
@@ -30,7 +32,7 @@ docker compose up -d --build
 
 ## Verificação
 
-1. Acessar a API: `curl http://localhost:5000` (ou abrir no navegador). Resposta: `A API foi acedida 1 vezes.`
+1. Acessar a API: `curl http://localhost:5000` (ou abrir no navegador). Resposta: `A API foi acessada 1 vez.`
 2. Repetir algumas vezes e ver o contador subir.
 3. **Recriar o container preservando os dados:**
    ```bash
