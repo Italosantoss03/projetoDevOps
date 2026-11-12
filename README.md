@@ -62,6 +62,15 @@ docker compose down -v     # remove também o volume (apaga os dados)
 - Redis persistence: https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/
 - Flask: https://flask.palletsprojects.com/
 
+## Slides da apresentação
+
+- [Docker-Compose-T02.pptx](slides/Docker-Compose-T02.pptx): editável, com as notas de fala em cada slide.
+- [Docker-Compose-T02.pdf](slides/Docker-Compose-T02.pdf): a mesma apresentação em PDF.
+
+## Entrega
+
+Versão entregue: tag `entrega-t02` (12/11/2026).
+
 ## Autores
 
 Equipe Galegos:
