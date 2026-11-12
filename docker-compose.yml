@@ -1,18 +1,19 @@
+version: '3.8'
 services:
   api:
     build: .
+    container_name: api_contador      # Bônus: Dá um nome limpo ao contêiner
+    restart: unless-stopped           # Bônus: Reinicia sozinho se o PC reiniciar
     ports:
       - "5000:5000"
     environment:
-      REDIS_HOST: ${REDIS_HOST:-redis}
-      REDIS_PORT: ${REDIS_PORT:-6379}
+      - REDIS_HOST=redis              # Bônus: Injeta a configuração para o Python
     depends_on:
       - redis
-
   redis:
-    image: redis:7-alpine
-    # appendonly garante que os dados sejam gravados em disco (volume)
-    command: ["redis-server", "--appendonly", "yes"]
+    image: "redis:alpine"
+    container_name: banco_redis       # Bônus: Dá um nome limpo ao contêiner
+    restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
