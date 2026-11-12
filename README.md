@@ -16,7 +16,7 @@ cliente --HTTP:5000--> [api (Flask)] --rede do Compose, host "redis":6379--> [re
 ## Versões e requisitos
 
 - Docker Engine 24+ e Docker Compose v2 (`docker compose`)
-- Python 3.9 (imagem `python:3.9-alpine`), Flask, redis-py
+- Python 3.9 (imagem `python:3.9-alpine`), Flask 3.1.3 e redis-py 7.0.1 (fixados no `requirements.txt`)
 - Redis 7 (`redis:7-alpine`)
 
 **Versões testadas (12/11/2026, GitHub Codespaces):** Docker 29.9.2-2 e Docker Compose v5.6.1.
@@ -77,6 +77,7 @@ Versão entregue: tag `entrega-t02` (12/11/2026), atualizada no mesmo dia com as
 - `app.py`: a resposta passou de texto simples para uma página HTML com o contador de visitas.
 - `docker-compose.yml`: nomes de container (`api_contador`, `banco_redis`) e `restart: unless-stopped`; removida a linha `version`, obsoleta no Compose v2; imagem do Redis mantida em `redis:7-alpine` com `--appendonly yes`.
 - `.env.example`: só `REDIS_HOST`, a única variável que a API usa.
+- `requirements.txt`: versões fixadas (`Flask==3.1.3`, `redis==7.0.1`), as que rodam na imagem.
 - Slides (PPTX e PDF): a demonstração passou a abrir a página no navegador, no Codespaces.
 
 ## Autores
